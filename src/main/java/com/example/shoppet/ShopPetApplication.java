@@ -8,6 +8,7 @@ public class ShopPetApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ShopPetApplication.class, args);
+        System.out.println("http://localhost:8080/Pet");
     }
 
 }
