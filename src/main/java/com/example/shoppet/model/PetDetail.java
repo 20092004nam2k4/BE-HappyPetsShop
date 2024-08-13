@@ -14,11 +14,13 @@ public class PetDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String breed; // Giống loài
     private int age; // Tuổi
     private double weight; // Trọng lượng
-    private String color; // Màu sắc
     private String healthStatus; // Tình trạng sức khỏe
+    private String gender; // Giới tính
+    private boolean popular; // Phổ biến hay không
 
     // Có thể thêm các thuộc tính khác nếu cần
 }

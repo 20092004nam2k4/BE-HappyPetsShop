@@ -1,10 +1,422 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>create</title>
 
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/custom.css">
+    <style>
+        *, ::after, ::before {
+            box-sizing: border-box;
+        }
+
+        .content-wrapper {
+            max-height: 100%;
+            max-width: 100%;
+        }
+
+        .form-container {
+            padding: 30px;
+
+            border-radius: 0.375rem;
+            box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            border-radius: 0.375rem;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #00409a;
+        }
+
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .form-row {
+
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        #image-preview {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        .form-row {
+            justify-content: space-between;
+            gap: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .form-group {
+            margin: 10px;
+        }
+
+    </style>
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-right align-items-center">
+        <img class="animation__wobble" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+    </div>
+
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-dark">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="/Pet" class="nav-link">Trang Danh Sách</a>
+            </li>
+        </ul>
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+            <!-- Navbar Search -->
+            <li class="nav-item">
+                <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                    <i class="fas fa-search"></i>
+                </a>
+                <div class="navbar-search-block">
+                    <form class="form-inline">
+                        <div class="input-group input-group-sm">
+                            <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                                   aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-navbar" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
+
+            <!-- Fullscreen Toggle -->
+            <li class="nav-item">
+                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                    <i class="fas fa-expand-arrows-alt"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="/Pet" class="brand-link">
+            <img src="https://theme.hstatic.net/200000263355/1001161916/14/logo.png?v=93" alt="AdminLTE Logo"
+                 class="brand-image img-circle elevation-3" style="opacity: .8">
+            <span class="brand-text font-weight-light">Mozzi</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Danh mục
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/Pet" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Trang Danh Sách</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Đơn Hàng</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Người Dùng</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <div class="container">
+            <h2>Add Pet</h2>
+            <div class="form-container">
+                <form th:action="@{/Pet/save}" th:object="${pet}" method="post" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Tên thú cưng:</label>
+                            <input type="text" class="form-control" id="name" th:field="*{name}"
+                                   placeholder="Enter pet name"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quantity">Số lượng:</label>
+                            <input type="number" class="form-control" id="quantity" th:field="*{quantity}"
+                                   placeholder="Enter quantity"/>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="price">Giá:</label>
+                            <input type="number" class="form-control" id="price" th:field="*{price}"
+                                   placeholder="Enter pet price"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category">Thể loại thú cưng:</label>
+                            <select class="form-control" id="category" th:field="*{category.id}"
+                                    onchange="updateBreedOptions()">
+                                <option th:each="category : ${categories}" th:value="${category.id}"
+                                        th:text="${category.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="breed">Giống:</label>
+                            <select class="form-control" id="breed" th:field="*{petDetail.breed}">
+                                <!-- Các tùy chọn breed sẽ được cập nhật dựa trên category -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Tuổi:</label>
+                            <input type="number" class="form-control" id="age" th:field="*{petDetail.age}"
+                                   placeholder="Enter age"/>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="weight">Cân Nặng :</label>
+                            <input type="number" class="form-control" id="weight" th:field="*{petDetail.weight}"
+                                   placeholder="Enter weight"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="popular">Phổ biến:</label>
+                            <select class="form-control" id="popular" th:field="*{petDetail.popular}">
+                                <option value="true">Phổ biến nhất</option>
+                                <option value="false">Không phổ biến</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="healthStatus">Tình trạng sức khỏe:</label>
+                            <select class="form-control" id="healthStatus" th:field="*{petDetail.healthStatus}">
+                                <option value="Đã tiêm phòng">Đã tiêm phòng</option>
+                                <option value="Đã tiêm phòng">Chưa tiêm phòng</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Giới tính:</label>
+                            <select class="form-control" id="gender" th:field="*{petDetail.gender}">
+                                <option value="Male">Đực</option>
+                                <option value="Female">Cái</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Di chuyển phần "Phổ biến" lên trên -->
+
+
+                    <!-- Phần "Ảnh" và "Mô tả" -->
+                    <div class="form-row">
+                        <div class="form-group" style="flex: 1;">
+                            <label for="image">Ảnh:</label>
+                            <input type="file" class="form-control-file" id="image" name="file"
+                                   onchange="previewImage(event)" style="display: none;"/>
+                            <button type="button" class="btn btn-primary"
+                                    onclick="document.getElementById('image').click()">Choose File
+                            </button>
+                            <img id="image-preview" src="#" alt="Image Preview" style="display:none;"/>
+                        </div>
+                        <div class="form-group" style="flex: 2;">
+                            <label for="description">Mô tả:</label>
+                            <textarea class="form-control" id="description" th:field="*{description}"
+                                      placeholder="Enter description"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Căn giữa nút "Save Pet" -->
+                    <div class="form-row text-center">
+                        <button type="submit" class="btn btn-primary" style="display: inline-block; margin: 0 auto;">
+                            Save Pet
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- /.card-body -->
+</div>
+
+<aside class="control-sidebar control-sidebar-dark"></aside>
+<!-- /.control-sidebar -->
+
+<!-- Main Footer -->
+<footer class="main-footer">
+    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 3.2.0
+    </div>
+</footer>
+
+<script>
+    function updateBreedOptions() {
+        const categorySelect = document.getElementById('category');
+        const breedSelect = document.getElementById('breed');
+
+        // Các tùy chọn breed cho chó
+        const dogBreeds = [
+
+
+            {value: 'Chó Bảo Vệ', text: 'Chó Bảo Vệ'},
+            {value: 'Chó mặt xệ', text: 'Chó mặt xệ'},
+            {value: 'Chó ngao', text: 'Chó ngao'},
+            {value: 'Chó bull', text: 'Chó bull'},
+            {value: 'Chó săn', text: 'Chó săn'},
+            {value: 'Chó kéo xe', text: 'Chó kéo xe'},
+            {value: 'Chó xoáy', text: 'Chó xoáy'}
+        ];
+
+        // Các tùy chọn breed cho mèo
+        const catBreeds = [
+
+            {value: 'Quý Tộc', text: 'Quý tộc'},
+            {value: 'Đáng Yêu', text: 'Đáng yêu'},
+            {value: 'Lông Dài', text: 'Lông dài'},
+            {value: 'Lông Ngắn', text: 'Lông ngắn'},
+            {value: 'ít rụng lông', text: 'ít rụng lông'}
+        ];
+
+        let selectedBreeds = [];
+        const selectedCategory = categorySelect.options[categorySelect.selectedIndex].text;
+
+        // Cập nhật breed dựa trên category
+        if (selectedCategory === 'Chó') {
+            selectedBreeds = dogBreeds;
+        } else if (selectedCategory === 'Mèo') {
+            selectedBreeds = catBreeds;
+        }
+
+        // Xóa tất cả các tùy chọn hiện tại
+        breedSelect.innerHTML = '';
+
+        // Thêm các tùy chọn breed mới
+        selectedBreeds.forEach(breed => {
+            const option = document.createElement('option');
+            option.value = breed.value;
+            option.text = breed.text;
+            breedSelect.appendChild(option);
+        });
+    }
+
+</script>
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/dist/js/adminlte.js"></script>
+
+<!-- PAGE PLUGINS -->
+<!-- jQuery Mapael -->
+<script src="/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="/plugins/raphael/raphael.min.js"></script>
+<script src="/plugins/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="/plugins/jquery-mapael/maps/usa_states.min.js"></script>
+<!-- ChartJS -->
+<script src="/plugins/chart.js/Chart.min.js"></script>
+
+<!-- AdminLTE for demo purposes -->
+<script src="/dist/js/pages/dashboard2.js"></script>
+<!-- Custom Scripts -->
+<script>
+    function previewImage(event) {
+        const input = event.target;
+        const file = input.files[0];
+        const preview = document.getElementById('image-preview');
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '#';
+            preview.style.display = 'none';
+        }
+    }
+</script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>home</title>
+    <title>update</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -14,67 +14,33 @@
     <link rel="stylesheet" href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+
     <style>
-
-        .card {
+        .form-container {
+            padding: 30px;
+            border-radius: 0.375rem;
             box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
-            margin-bottom: 1rem;
         }
 
-        .card {
-            position: relative;
-            display: -ms-flexbox;
-            display: flex;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            min-width: 0;
-            word-wrap: break-word;
-            background-color: #fff;
-            background-clip: border-box;
-            border: 0 solid rgba(0, 0, 0, .125);
-            border-radius: .25rem;
-            padding-top: 30px;
+        .form-group {
+            margin-bottom: 15px;
         }
 
-        *, ::after, ::before {
-            box-sizing: border-box;
+        .form-container button {
+            width: 100%;
         }
 
-        .content-wrapper {
-            max-height: 100%;
-            max-width: 100%;
+        .form-container h2 {
+            margin-bottom: 20px;
         }
 
-        .action-icons {
-            display: flex;
-            gap: 10px; /* Khoảng cách giữa các icon */
+        #image-preview {
+            width: 100px;
+            height: 100px;
+            margin-top: 10px;
+            object-fit: cover;
+            display: none;
         }
-
-        .table-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 15px;
-            max-width: 100%;
-        }
-
-        /* Căn giữa nội dung của các ô bảng */
-        /* Căn giữa nội dung của các ô trong bảng */
-        .table td, .table th {
-            text-align: center; /* Căn giữa theo chiều ngang */
-            vertical-align: middle; /* Căn giữa theo chiều dọc */
-        }
-
-        /* Căn giữa các hành động trong cột cuối cùng */
-        .table .action-icons {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Căn giữa bảng trong khung chứa */
-
-
     </style>
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -190,101 +156,93 @@
         </div>
         <!-- /.sidebar -->
     </aside>
-
-
-    <!-- cho table vào đây -->
-    <div class="content-wrapper">
-        <div class="card">
-            <div class="card-body">
-                <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                    <div class="col-sm-12 col-md-12">
-                        <div class="card-header">
-                            <!-- Cập nhật nút "Thêm thú cưng" để trỏ đến đường dẫn create -->
-                            <a href="/Pet/create" class="btn btn-primary float-right">Thêm thú cưng</a>
+    <!-- cho table update -->
+    <div class="container mt-5">
+        <div class="content-wrapper">
+            <div class="container">
+                <h2 class="text-center">Edit Pet</h2>
+                <div class="form-container mx-auto col-md-8">
+                    <form th:action="@{/Pet/update}" th:object="${pet}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" th:field="*{id}"/>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="name">Pet Name:</label>
+                                <input type="text" class="form-control" id="name" th:field="*{name}"
+                                       placeholder="Enter pet name"/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="quantity">Quantity:</label>
+                                <input type="number" class="form-control" id="quantity" th:field="*{quantity}"
+                                       placeholder="Enter quantity"/>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <!-- Hiển thị thông báo nếu có -->
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div th:if="${message}" class="alert alert-success" role="alert">
-                            <span th:text="${message}"></span>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="price">Price:</label>
+                                <input type="number" class="form-control" id="price" th:field="*{price}"
+                                       placeholder="Enter pet price"/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="category">Category:</label>
+                                <select class="form-control" id="category" th:field="*{category.id}">
+                                    <option th:each="category : ${categories}" th:value="${category.id}"
+                                            th:text="${category.name}"></option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="table-container">
-                            <table id="example1" class="table table-gray table-striped dataTable dtr-inline"
-                                   aria-describedby="example1_info">
-                                <thead>
-                                <tr>
-
-                                    <th>Ảnh</th>
-                                    <th>Tên Thú Cưng</th>
-                                    <th>Giá</th>
-                                    <th>Mô Tả</th>
-                                    <th>Hành Động</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="pet : ${pets}">
-
-                                    <td>
-                                        <a th:href="@{/Pet/view/{id}(id=${pet.id})}">
-                                            <img style="object-fit: contain;" width="70px" height="70px"
-                                                 th:src="@{'/image/' + ${pet.image}}" alt="">
-                                        </a>
-                                    </td>
-                                    <td th:text="${pet.name}">Tên Thú Cưng</td>
-                                    <td class="price" th:text="${pet.price}">Giá</td>
-                                    <td th:text="${pet.description}"></td>
-                                    <td>
-                                        <div class="action-icons">
-                                            <a style="color: red"
-                                               th:href="@{/Pet/delete/{id}(id=${pet.id})}" class="btn"
-                                               onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                            <a style="color:grey;"
-                                               th:href="@{/Pet/edit/{id}(id=${pet.id})}" class="btn">
-                                                <em class="fa fa-edit"></em>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="breed">Breed:</label>
+                                <input type="text" class="form-control" id="breed" th:field="*{petDetail.breed}"
+                                       placeholder="Enter breed"/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="age">Age:</label>
+                                <input type="number" class="form-control" id="age" th:field="*{petDetail.age}"
+                                       placeholder="Enter age"/>
+                            </div>
                         </div>
-                        <!-- Phân trang -->
-                        <div th:if="${totalPages > 1}">
-                            <div class="phantrang d-flex justify-content-center mt-4">
-                                <!-- Nút "Trước" -->
-                                <a class="btn btn-secondary mr-2" th:if="${currentPage > 0}"
-                                   th:href="@{/Pet(page=${currentPage - 1})}">Trước</a>
-
-                                <!-- Các trang -->
-                                <div th:each="page : ${#numbers.sequence(0, totalPages - 1)}">
-                                    <a class="btn mx-1"
-                                       th:href="@{/Pet(page=${page})}"
-                                       th:text="${page + 1}"
-                                       th:classappend="${page == currentPage} ? 'btn-primary' : 'btn-secondary'"></a>
-                                </div>
-
-                                <!-- Nút "Sau" -->
-                                <a class="btn btn-secondary ml-2" th:if="${currentPage < totalPages - 1}"
-                                   th:href="@{/Pet(page=${currentPage + 1})}">Sau</a>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="weight">Weight:</label>
+                                <input type="number" class="form-control" id="weight" th:field="*{petDetail.weight}"
+                                       placeholder="Enter weight"/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="color">Color:</label>
+                                <input type="text" class="form-control" id="color" th:field="*{petDetail.color}"
+                                       placeholder="Enter color"/>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="healthStatus">Health Status:</label>
+                                <input type="text" class="form-control" id="healthStatus"
+                                       th:field="*{petDetail.healthStatus}" placeholder="Enter health status"/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="image">Image:</label>
+                                <input type="file" class="form-control-file" id="image" name="file"
+                                       onchange="previewImage(event)" style="display: none;"/>
+                                <button type="button" class="btn btn-primary"
+                                        onclick="document.getElementById('image').click()">Choose File
+                                </button>
+                                <img id="image-preview" src="#" alt="Image Preview"/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="description">Description:</label>
+                                <textarea class="form-control" id="description" th:field="*{description}"
+                                          placeholder="Enter description"></textarea>
                             </div>
                         </div>
 
-                    </div>
-
+                        <button type="submit" class="btn btn-success">Save Pet</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <aside class="control-sidebar control-sidebar-dark">
 
@@ -308,6 +266,8 @@
         });
     });
 </script>
+<script th:src="@{/js/jquery.min.js}"></script>
+
 <script src="/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
